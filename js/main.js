@@ -78,7 +78,7 @@
     $$(".nav__links a").forEach((link) => {
       const sec = $(link.getAttribute("href"));
       if (!sec) return;
-      ScrollTrigger.create({ trigger: sec, start: "top 50%", end: "bottom 50%", onToggle: (st) => link.classList.toggle("is-active", st.isActive) });
+      ScrollTrigger.create({ trigger: sec, start: "top 50%", end: "bottom 50%", refreshPriority: -1, onToggle: (st) => link.classList.toggle("is-active", st.isActive) });
     });
 
     // Barra de progresso
@@ -177,7 +177,7 @@
           gsap.set(".vc__bar span", { scaleX: st.progress });
         },
       });
-      gsap.from(".vc__media", { clipPath: desk ? "inset(0 100% 0 0)" : "inset(100% 0 0 0)", duration: 1.6, ease: "expo.inOut", scrollTrigger: { trigger: vc, start: "top 75%" } });
+      gsap.from(".vc__media", { clipPath: "inset(0 100% 0 0)", duration: 1.6, ease: "expo.inOut", scrollTrigger: { trigger: vc, start: "top 75%" } });
       gsap.from(".vc__media video", { scale: 1.35, duration: 2.2, ease: "expo.out", scrollTrigger: { trigger: vc, start: "top 75%" } });
 
       // Projetos: no computador sobem juntos; no celular, cada cartão entra quando aparece
@@ -193,12 +193,13 @@
       gsap.from(".mind__l", { xPercent: (i) => (i % 2 ? 30 : -30), opacity: 0, stagger: 0.14, duration: 1.3, ease: "expo.out", scrollTrigger: { trigger: mind, start: "top 70%" } });
       gsap.from(bestChars, { yPercent: 100, opacity: 0, rotate: 8, stagger: 0.04, duration: 1, ease: "expo.out", scrollTrigger: { trigger: mind, start: "top 55%" } });
       gsap.fromTo(".mind__u", { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "expo.inOut", scrollTrigger: { trigger: mind, start: "top 40%" } });
+      gsap.set(".mind__text", { y: 40, opacity: 0 });
       gsap.timeline({
         scrollTrigger: {
           trigger: mind, start: "top top", end: () => "+=" + H() * (desk ? 1.4 : 1.1), pin: ".mind__inner", scrub: 0.8, invalidateOnRefresh: true,
           onUpdate: (st) => mind.classList.toggle("is-flip", st.progress > 0.6),
         },
-      }).from(".mind__text", { y: 40, opacity: 0 }).to({}, { duration: 1 });
+      }).fromTo(".mind__text", { y: 40, opacity: 0 }, { y: 0, opacity: 1, immediateRender: false }).to({}, { duration: 1 });
 
       // Celular: foto e selos do hero flutuam com a rolagem (no lugar do mouse)
       if (!desk) {
