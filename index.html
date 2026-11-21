@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>João Pedro Salomão de Sá — Portfólio</title>
+  <meta name="description" content="João Pedro Salomão de Sá, 16 anos: estudante de Redes, fundador da V-Clothes, em busca de um estágio em TI." />
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Carregamento: some sozinho por CSS mesmo se o JS falhar -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__name"><span class="sig sig--loader"></span><span>João Pedro</span></div>
+    <div class="loader__count"><span id="count">0</span>%</div>
+  </div>
+
+  <div class="progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#top" class="nav__logo" data-magnetic aria-label="João Pedro Salomão de Sá — início"><span class="sig sig--nav" aria-hidden="true"></span></a>
+    <nav class="nav__links" aria-label="Seções">
+      <a href="#sobre">Sobre</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#visao">Visão</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__text">
+        <p class="eyebrow hero__fade">16 anos · Redes + Software</p>
+        <h1 class="hero__name" aria-label="João Pedro Salomão de Sá">
+          <span class="line" data-chars>João Pedro</span>
+          <span class="line line--indent" data-chars><em>Salomão</em></span>
+          <span class="line" data-chars>de Sá</span>
+        </h1>
+        <p class="hero__lead hero__fade">Estudo redes e desenvolvo meus próprios projetos de software. Quero seguir aprendendo na prática, e procuro um <strong>estágio em TI</strong>.</p>
+      </div>
+
+      <div class="hero__visual">
+        <figure class="hero__photo" data-cursor="Oi!"><span class="hero__sheen" aria-hidden="true"></span>
+          <img src="assets/hero.jpg" alt="Retrato de João Pedro Salomão de Sá" width="800" height="800" />
+        </figure>
+        <span class="chip chip--a" data-float="18">Fundador · V&#8209;Clothes</span>
+        <span class="chip chip--b" data-float="-26">1º lugar técnico · FECEAP 2026</span>
+        <span class="chip chip--c" data-float="12">Em busca de estágio em TI</span>
+      </div>
+
+      <a class="scroll-hint hero__fade" href="#sobre"><span class="scroll-hint__line"></span>Role</a>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Redes</span><i>✦</i><span>Software</span><i>✦</i><span>Inteligência artificial</span><i>✦</i><span>Produto</span><i>✦</i><span>Fazer acontecer</span><i>✦</i>
+        <span>Redes</span><i>✦</i><span>Software</span><i>✦</i><span>Inteligência artificial</span><i>✦</i><span>Produto</span><i>✦</i><span>Fazer acontecer</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="section about">
+      <div class="about__side">
+        <p class="section__label">Quem sou</p>
+        <figure class="about__photo">
+          <img src="assets/booth.jpg" alt="João Pedro no estande do V-Clothes" loading="lazy" width="562" height="1000" />
+        </figure>
+      </div>
+      <div class="about__main">
+        <p class="about__big" data-words>Minha formação é em redes, mas o que me move é construir software. Gosto de entender a infraestrutura por trás de tudo e, depois, criar algo em cima dela.</p>
+        <div class="about__cols">
+          <p data-reveal>Aprendo fazendo. Nos projetos em grupo do técnico, como o da rede Xenonet, gosto de colocar a mão na configuração e ver tudo funcionando de verdade.</p>
+          <p data-reveal>Tenho 16 anos e quero crescer na área com um estágio em TI: aprender com quem já tem experiência, contribuir com o time e evoluir rápido. Enquanto isso, sigo construindo a V&#8209;Clothes, startup que fundei com colegas do CEAP.</p>
+        </div>
+        <ul class="facts">
+          <li data-reveal><span>Formação</span>Técnico em Redes de Computadores · CEAP · 2025–2027</li>
+          <li data-reveal><span>Hoje</span>Fundador e CTO da V&#8209;Clothes</li>
+          <li data-reveal><span>Buscando</span>Estágio em TI, para aprender na prática</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TRAJETÓRIA -->
+    <section id="trajetoria" class="section timeline">
+      <div class="tl__head">
+        <p class="section__label">Trajetória</p>
+        <h2 class="section__title" data-split>Passo a passo.</h2>
+      </div>
+      <ol class="tl">
+        <li class="tl__item"><span class="tl__date">2025</span><p>Entro no Técnico em Redes de Computadores, no CEAP.</p></li>
+        <li class="tl__item"><span class="tl__date">2025</span><p>Concluo o CCNA: Introduction to Networks, da Cisco (70h).</p></li>
+        <li class="tl__item"><span class="tl__date">Jun 2026</span><p>Concluo o segundo módulo do CCNA: Switching, Roteamento e Redes Sem Fio (70h).</p></li>
+        <li class="tl__item tl__item--hi"><span class="tl__date">2026</span><p>A V&#8209;Clothes fica em <strong>1º lugar na votação técnica</strong> da FECEAP.</p></li>
+        <li class="tl__item"><span class="tl__date">Nov 2026</span><p>Projeto em grupo da rede Xenonet: configuração da rede e do servidor.</p></li>
+        <li class="tl__item tl__item--next"><span class="tl__date">Agora</span><p>Procurando um estágio em TI para seguir aprendendo na prática.</p></li>
+      </ol>
+    </section>
+
+    <!-- V-CLOTHES (seção fixa com etapas) -->
+    <section id="projetos" class="vc">
+      <div class="vc__inner">
+        <div class="vc__media" data-cursor="V-Clothes">
+          <video src="assets/vclothes-booth.mp4" autoplay muted loop playsinline preload="metadata" aria-label="João Pedro apresentando a V-Clothes no estande"></video>
+          <div class="vc__badge">1º lugar<br />votação técnica</div>
+        </div>
+        <div class="vc__body">
+          <p class="section__label">Projeto em destaque · Fundador e CTO</p>
+          <h2 class="vc__title" data-split>V&#8209;Clothes</h2>
+          <p class="vc__lead" data-reveal>Provador virtual para lojas de moda. A ideia é reduzir trocas e devoluções por tamanho errado e ajudar a loja a vender mais.</p>
+          <ol class="steps">
+            <li class="step"><b>01</b><span>O cliente envia duas fotos</span></li>
+            <li class="step"><b>02</b><span>Recebe as medidas do corpo</span></li>
+            <li class="step"><b>03</b><span>Ganha a recomendação de tamanho</span></li>
+            <li class="step"><b>04</b><span>Vê o próprio avatar em 3D</span></li>
+            <li class="step"><b>05</b><span>Monta looks com as peças da loja</span></li>
+          </ol>
+          <div class="vc__bar"><span></span></div>
+          <p class="vc__note" data-reveal>Provador ao vivo com IA em desenvolvimento. Sou o fundador e CTO da V&#8209;Clothes, que nasceu com a equipe do CEAP.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTROS PROJETOS (rolagem horizontal) -->
+    <section class="hs" aria-label="Outros projetos">
+      <div class="hs__head">
+        <p class="section__label">Outros projetos</p>
+        <h2 class="section__title" data-split>O que mais estou construindo.</h2>
+      </div>
+      <div class="hs__track">
+        <article class="card" data-tilt>
+          <span class="card__n">01</span>
+          <p class="card__meta">Projeto pessoal · em desenvolvimento</p>
+          <h3>OdontoFlow</h3>
+          <p>Plataforma para gestão de clínicas odontológicas. Reúne agenda com WhatsApp, prontuário com odontograma, financeiro, estoque e a Mel, uma assistente com IA. Também passei por uma revisão de segurança, corrigindo o login e o acesso aos dados.</p>
+          <p class="card__tags">React · TypeScript · Node.js · Gemini AI</p>
+        </article>
+        <article class="card" data-tilt>
+          <span class="card__n">02</span>
+          <p class="card__meta">Projeto de rede escolar · em grupo</p>
+          <h3>Xenonet Soluções em Redes</h3>
+          <p>Projeto em grupo do técnico. Trabalhei na configuração da rede, com roteador, switch e VLANs, e do servidor, com serviços como e-mail, além de um site de gestão da rede.</p>
+          <p class="card__tags">Cisco 1941 · Switch 2960 · VLANs · Servidor</p>
+        </article>
+        <article class="card" data-tilt>
+          <span class="card__n">03</span>
+          <p class="card__meta">Projeto pessoal · em desenvolvimento</p>
+          <h3>Recuperação de leads via WhatsApp</h3>
+          <p>SaaS que desenvolvo sozinho. Ele se conecta ao WhatsApp oficial e usa IA para reativar contatos parados na base de uma empresa. O plano é começar com um piloto em uma empresa.</p>
+          <p class="card__tags">WhatsApp Cloud API · IA</p>
+        </article>
+        <article class="card" data-tilt>
+          <span class="card__n">04</span>
+          <p class="card__meta">Sistema para uso real</p>
+          <h3>Caixa da Casa</h3>
+          <p>Sistema de organização financeira para usar de verdade em casa, com leitura de cupom fiscal para lançar os gastos automaticamente. Foi apresentado em out/2026.</p>
+          <p class="card__tags">Finanças · Leitura de cupom</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- VISÃO -->
+    <section id="visao" class="mind">
+      <div class="mind__inner">
+        <p class="section__label">Minha visão</p>
+        <h2 class="mind__phrase">
+          <span class="mind__l">The first,</span>
+          <span class="mind__l"><em>the last,</em></span>
+          <span class="mind__l mind__l--hi"><span class="mind__best">the best.</span><span class="mind__u" aria-hidden="true"></span></span>
+        </h2>
+        <p class="mind__text">Ser o primeiro a aparecer com uma ideia, o último a desistir dela e, com o tempo, quem entrega o melhor trabalho do time.</p>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section id="galeria" class="section gallery">
+      <p class="section__label">Visual journey</p>
+      <div class="gallery__grid">
+        <figure class="g g--1" data-cursor="FECEAP">
+          <div class="g__frame"><img src="assets/booth.jpg" alt="João Pedro apresentando a V-Clothes no estande" loading="lazy" width="562" height="1000" /></div>
+          <figcaption>Apresentando a V&#8209;Clothes</figcaption>
+        </figure>
+        <figure class="g g--2" data-cursor="Equipe">
+          <div class="g__frame"><img src="assets/group-lanyards.jpg" alt="João Pedro com integrantes da equipe no evento" loading="lazy" width="1064" height="719" /></div>
+          <figcaption>Equipe no evento</figcaption>
+        </figure>
+        <figure class="g g--3" data-cursor="1º">
+          <div class="g__frame"><img src="assets/group-medals.jpg" alt="Equipe da V-Clothes com medalhas" loading="lazy" width="750" height="1000" /></div>
+          <figcaption>Com a medalha da competição</figcaption>
+        </figure>
+        <figure class="g g--4" data-cursor="Pitch">
+          <div class="g__frame"><img src="assets/booth-talk.jpg" alt="João Pedro e um colega da V-Clothes explicando o projeto a um visitante no estande" loading="lazy" width="1280" height="720" /></div>
+          <figcaption>Explicando o projeto para os visitantes</figcaption>
+        </figure>
+        <figure class="g g--5" data-cursor="IA">
+          <div class="g__frame"><img src="assets/ai-demo.jpg" alt="Monitor com webcam mostrando a demonstração do provador virtual com IA" loading="lazy" width="800" height="999" /></div>
+          <figcaption>Demo do provador com IA rodando no estande</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="contact">
+      <div class="contact__marquee" aria-hidden="true">
+        <div class="contact__mtrack">
+          <span>Vamos conversar</span><i>✦</i><span><em>Let&rsquo;s talk</em></span><i>✦</i><span>Vamos conversar</span><i>✦</i><span><em>Let&rsquo;s talk</em></span><i>✦</i>
+        </div>
+      </div>
+
+      <div class="contact__grid">
+        <div class="contact__intro">
+          <p class="section__label">Vamos conversar</p>
+          <h2 class="contact__title" data-split>Quero aprender com você.</h2>
+          <p class="contact__lead" data-reveal>Tenho 16 anos e estou em busca de um estágio em TI. Se você tem uma vaga ou uma oportunidade para eu aprender e contribuir, vou gostar muito de conversar.</p>
+        </div>
+
+        <ul class="rows">
+          <li class="row" data-reveal>
+            <a class="row__link" href="mailto:joaopedrosalomaodesa@gmail.com">
+              <span class="row__k">E-mail</span>
+              <span class="row__v row__v--mail">joaopedrosalomaodesa<wbr>@gmail.com</span>
+              <span class="row__arrow" aria-hidden="true">↗</span>
+            </a>
+            <button class="copy" type="button" data-copy="joaopedrosalomaodesa@gmail.com" aria-label="Copiar e-mail">Copiar</button>
+          </li>
+          <li class="row" data-reveal>
+            <a class="row__link" href="https://wa.me/5511976695259" target="_blank" rel="noopener">
+              <span class="row__k">WhatsApp</span>
+              <span class="row__v">(11) 97669-5259</span>
+              <span class="row__arrow" aria-hidden="true">↗</span>
+            </a>
+            <button class="copy" type="button" data-copy="(11) 97669-5259" aria-label="Copiar número de WhatsApp">Copiar</button>
+          </li>
+          <li class="row row--static" data-reveal>
+            <div class="row__link">
+              <span class="row__k">O que procuro</span>
+              <span class="row__v">Estágio em TI, para aprender na prática</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact__sign">
+        <span class="sig sig--big" aria-hidden="true"></span>
+        <p>João Pedro Salomão de Sá</p>
+      </div>
+
+      <div class="contact__foot">
+        <span>© 2026 João Pedro Salomão de Sá</span>
+        <span>The first, the last, the best.</span>
+        <a href="#top">Voltar ao topo ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vendor/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
