@@ -57,6 +57,7 @@
 
     // Rolagem suave
     const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+    window.__lenis = lenis;
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -155,52 +156,58 @@
     gsap.from(".sig--big", { clipPath: "inset(0 100% 0 0)", duration: 2.2, ease: "power2.inOut", scrollTrigger: { trigger: ".contact__sign", start: "top 92%" } });
 
     // ---------- Seções fixas: só em telas largas ----------
+    // Barra de endereço do celular não deve recalcular tudo a cada rolagem
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    const bestChars = splitChars($(".mind__best"));
+    const vc = $(".vc"), steps = $$(".step"), mind = $(".mind");
+
     const mm = gsap.matchMedia();
-    mm.add("(min-width: 901px)", () => {
-      // V-Clothes: as etapas do produto avançam com o scroll
-      const vc = $(".vc");
-      const steps = $$(".step");
+    mm.add({ desk: "(min-width: 901px)", mob: "(max-width: 900px)" }, (ctx) => {
+      const { desk } = ctx.conditions;
+      const H = () => window.innerHeight;
+
+      // V-Clothes: seção fixa e as etapas do produto acendem com o scroll (computador e celular)
       vc.classList.add("is-steps");
       gsap.set(".vc__bar span", { scaleX: 0 });
       ScrollTrigger.create({
-        trigger: vc, start: "top top", end: "+=" + innerHeight * 1.6, pin: ".vc__inner", scrub: true,
-        onUpdate: (s) => {
-          const idx = Math.min(steps.length - 1, Math.floor(s.progress * steps.length));
-          steps.forEach((st, i) => st.classList.toggle("is-on", i <= idx));
-          gsap.set(".vc__bar span", { scaleX: s.progress });
+        trigger: vc, start: "top top", end: () => "+=" + H() * (desk ? 1.6 : 1.3), pin: ".vc__inner", scrub: true, invalidateOnRefresh: true,
+        onUpdate: (st) => {
+          const idx = Math.min(steps.length - 1, Math.floor(st.progress * steps.length));
+          steps.forEach((el, i) => el.classList.toggle("is-on", i <= idx));
+          gsap.set(".vc__bar span", { scaleX: st.progress });
         },
       });
-      gsap.from(".vc__media", { clipPath: "inset(0 100% 0 0)", duration: 1.6, ease: "expo.inOut", scrollTrigger: { trigger: vc, start: "top 75%" } });
+      gsap.from(".vc__media", { clipPath: desk ? "inset(0 100% 0 0)" : "inset(100% 0 0 0)", duration: 1.6, ease: "expo.inOut", scrollTrigger: { trigger: vc, start: "top 75%" } });
       gsap.from(".vc__media video", { scale: 1.35, duration: 2.2, ease: "expo.out", scrollTrigger: { trigger: vc, start: "top 75%" } });
 
-      // Outros projetos: cartões sobem em sequência
-      gsap.from(".card", { y: 80, opacity: 0, rotationX: -12, transformPerspective: 900, duration: 1.3, ease: "expo.out", stagger: 0.14, scrollTrigger: { trigger: ".hs__track", start: "top 82%" } });
+      // Projetos: no computador sobem juntos; no celular, cada cartão entra quando aparece
+      if (desk) {
+        gsap.from(".card", { y: 80, opacity: 0, rotationX: -12, transformPerspective: 900, duration: 1.3, ease: "expo.out", stagger: 0.14, scrollTrigger: { trigger: ".hs__track", start: "top 82%" } });
+      } else {
+        $$(".card").forEach((c) => gsap.from(c, { y: 70, opacity: 0, rotationX: -10, transformPerspective: 800, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: c, start: "top 88%" } }));
+        // número do cartão desliza conforme a rolagem
+        $$(".card__n").forEach((n) => gsap.fromTo(n, { xPercent: -12 }, { xPercent: 12, ease: "none", scrollTrigger: { trigger: n, start: "top bottom", end: "bottom top", scrub: true } }));
+      }
 
-      // Visão: frase entra linha a linha e a tela vira
-      const mind = $(".mind");
-      const mt = gsap.timeline({
-        scrollTrigger: {
-          trigger: mind, start: "top top", end: "+=" + innerHeight * 1.4, pin: ".mind__inner", scrub: 0.8,
-          onUpdate: (s) => mind.classList.toggle("is-flip", s.progress > 0.72),
-        },
-      });
-      // 1. a frase entra antes de a seção fixar, então nunca há tela vazia
+      // Visão: frase entra, a seção fixa e a tela vira verde
       gsap.from(".mind__l", { xPercent: (i) => (i % 2 ? 30 : -30), opacity: 0, stagger: 0.14, duration: 1.3, ease: "expo.out", scrollTrigger: { trigger: mind, start: "top 70%" } });
-      const bestChars = splitChars($(".mind__best"));
       gsap.from(bestChars, { yPercent: 100, opacity: 0, rotate: 8, stagger: 0.04, duration: 1, ease: "expo.out", scrollTrigger: { trigger: mind, start: "top 55%" } });
       gsap.fromTo(".mind__u", { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "expo.inOut", scrollTrigger: { trigger: mind, start: "top 40%" } });
-      mt.from(".mind__text", { y: 40, opacity: 0 }).to({}, { duration: 1 });
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: mind, start: "top top", end: () => "+=" + H() * (desk ? 1.4 : 1.1), pin: ".mind__inner", scrub: 0.8, invalidateOnRefresh: true,
+          onUpdate: (st) => mind.classList.toggle("is-flip", st.progress > 0.6),
+        },
+      }).from(".mind__text", { y: 40, opacity: 0 }).to({}, { duration: 1 });
 
-      return () => {
-        vc.classList.remove("is-steps");
-        mind.classList.remove("is-flip");
-      };
-    });
-    mm.add("(max-width: 900px)", () => {
-      // No celular, a frase acende ao entrar
-      ScrollTrigger.create({ trigger: ".mind", start: "top 40%", end: "bottom 40%", toggleClass: { targets: ".mind", className: "is-flip" } });
-      gsap.from(".mind__l", { x: -40, opacity: 0, stagger: 0.15, duration: 1, ease: "expo.out", scrollTrigger: { trigger: ".mind", start: "top 70%" } });
-      gsap.fromTo(".mind__u", { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: "expo.inOut", scrollTrigger: { trigger: ".mind", start: "top 50%" } });
+      // Celular: foto e selos do hero flutuam com a rolagem (no lugar do mouse)
+      if (!desk) {
+        gsap.to(".chip--a", { y: -40, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+        gsap.to(".chip--c", { y: -70, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+        gsap.to(".hero__photo", { rotation: -2, scale: 0.94, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+      }
+
+      return () => { vc.classList.remove("is-steps"); mind.classList.remove("is-flip"); };
     });
 
     window.addEventListener("load", () => ScrollTrigger.refresh());
@@ -277,6 +284,27 @@
         photo(nx * -14);
       });
     }
+  }
+
+  // ---------- Toque/clique: luz no ponto tocado dos cartões ----------
+  $$(".card").forEach((c) => c.addEventListener("pointerdown", (e) => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty("--mx", `${e.clientX - r.left}px`); c.style.setProperty("--my", `${e.clientY - r.top}px`);
+    c.classList.add("is-touch"); setTimeout(() => c.classList.remove("is-touch"), 900);
+  }));
+
+  // ---------- Menu do celular ----------
+  const toggle = $(".nav__toggle"), menu = $(".menu");
+  if (toggle && menu) {
+    const setOpen = (open) => {
+      document.documentElement.classList.toggle("menu-open", open);
+      toggle.setAttribute("aria-expanded", open);
+      menu.setAttribute("aria-hidden", !open);
+      if (window.__lenis) open ? window.__lenis.stop() : window.__lenis.start();
+    };
+    toggle.addEventListener("click", () => setOpen(!document.documentElement.classList.contains("menu-open")));
+    $$(".menu a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
   }
 
   // ---------- Contato: copiar ----------

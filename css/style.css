@@ -89,7 +89,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   transform: scaleX(0); transform-origin: right; transition: transform 0.5s var(--ease);
 }
 .nav__links a:hover::after { transform: scaleX(1); transform-origin: left; }
-@media (max-width: 720px) { .nav__links a { display: none; } .nav__links a[href="#contato"] { display: inline; } }
+@media (max-width: 720px) { .nav__links { display: none; } }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -186,7 +186,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 @media (max-width: 860px) {
   .about { grid-template-columns: 1fr; }
   .about__side { position: static; }
-  .about__photo { display: none; }
+  .about__photo { max-width: none; aspect-ratio: 16 / 10; margin-top: 4px; }
   .about__cols, .facts { grid-template-columns: 1fr; }
 }
 
@@ -248,9 +248,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .vc__bar { height: 2px; background: rgba(12, 12, 11, 0.12); margin-top: 22px; max-width: 560px; }
 .vc__bar span { display: block; height: 100%; background: var(--bg); transform-origin: left; transform: scaleX(1); }
 .vc__note { margin-top: 22px; max-width: 540px; font-size: 15px; color: #55544f; }
-@media (max-width: 900px) {
-  .vc__inner { grid-template-columns: 1fr; min-height: 0; }
-  .vc__media { max-width: 320px; }
 }
 
 /* ---------- Rolagem horizontal ---------- */
@@ -443,3 +440,66 @@ a.row__link:hover .row__arrow { transform: rotate(45deg); }
   .js .loader__name > span:last-child { opacity: 1; transform: none; }
   .hero__sheen { display: none; }
 }
+
+/* ---------- Menu do celular ---------- */
+.nav__toggle {
+  display: none; align-items: center; gap: 12px; min-height: 44px; padding: 0;
+  background: none; border: 0; color: inherit; font: 500 14px var(--sans); letter-spacing: 0.04em; cursor: pointer;
+}
+.nav__burger { position: relative; width: 26px; height: 10px; }
+.nav__burger i { position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor; transition: transform 0.6s var(--ease), top 0.6s var(--ease); }
+.nav__burger i:first-child { top: 0; } .nav__burger i:last-child { top: 8px; }
+.menu-open .nav__burger i:first-child { top: 4px; transform: rotate(45deg); }
+.menu-open .nav__burger i:last-child { top: 4px; transform: rotate(-45deg); }
+.menu-open .nav { transform: none !important; }
+@media (max-width: 720px) { .nav__toggle { display: inline-flex; } }
+
+.menu {
+  position: fixed; inset: 0; z-index: 65; background: var(--paper); color: var(--bg);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 110px var(--pad) 36px;
+  clip-path: inset(0 0 100% 0); visibility: hidden;
+  transition: clip-path 0.9s var(--ease), visibility 0s 0.9s;
+}
+.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path 0.9s var(--ease), visibility 0s; }
+.menu__links { display: flex; flex-direction: column; }
+.menu__links a {
+  display: flex; align-items: baseline; gap: 14px; padding: 8px 0; border-bottom: 1px solid rgba(12,12,11,0.12);
+  font-family: var(--serif); font-size: clamp(38px, 11vw, 64px); line-height: 1.05; letter-spacing: -0.02em; text-decoration: none;
+  opacity: 0; transform: translateY(40px); transition: opacity 0.5s, transform 0.8s var(--ease);
+}
+.menu__links a small { font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em; color: #77766f; }
+.menu-open .menu__links a { opacity: 1; transform: none; }
+.menu-open .menu__links a:nth-child(1) { transition-delay: 0.25s; } .menu-open .menu__links a:nth-child(2) { transition-delay: 0.3s; }
+.menu-open .menu__links a:nth-child(3) { transition-delay: 0.35s; } .menu-open .menu__links a:nth-child(4) { transition-delay: 0.4s; }
+.menu-open .menu__links a:nth-child(5) { transition-delay: 0.45s; } .menu-open .menu__links a:nth-child(6) { transition-delay: 0.5s; }
+.menu__links a:active { padding-left: 10px; }
+.menu__foot { display: flex; justify-content: space-between; align-items: flex-end; font-size: 13px; color: #55544f; }
+.sig--menu { height: 56px; color: var(--bg); }
+.menu-open, .menu-open body { overflow: hidden; }
+
+/* ---------- V-Clothes no celular: fixa na tela, etapas acendem ---------- */
+@media (max-width: 900px) {
+  .vc__inner {
+    grid-template-columns: 1fr; gap: 0; align-content: center;
+    min-height: 100svh; padding: 76px var(--pad) 28px;
+  }
+  .vc__media { order: 2; width: 100%; max-width: none; aspect-ratio: auto; height: clamp(150px, 28svh, 280px); max-height: none; margin: 16px 0 4px; }
+  .vc__body { display: contents; }
+  .vc__body > .section__label { order: 0; margin-bottom: 8px; }
+  .vc__title { order: 1; font-size: clamp(46px, 13vw, 72px); }
+  .vc__lead { order: 1; font-size: 15px; margin-top: 8px; }
+  .steps { order: 3; margin-top: 10px; }
+  .step { font-size: 17px; padding: 8px 0; gap: 14px; }
+  .vc__bar { order: 4; margin-top: 12px; }
+  .vc__note { order: 5; font-size: 13px; margin-top: 12px; }
+  .vc__badge { font-size: 11px; padding: 6px 10px; bottom: 10px; }
+}
+@media (max-width: 900px) and (max-height: 760px) { .vc__lead { display: none; } .vc__media { height: 24svh; } }
+
+/* Toque nos cartões acende a luz */
+.card.is-touch::after { opacity: 1; }
+.card.is-touch { border-color: rgba(216, 255, 90, 0.55); }
+.card.is-touch .card__n { color: var(--accent); -webkit-text-stroke-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) { .menu, .menu__links a { transition: none; } }
